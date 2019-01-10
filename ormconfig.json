@@ -1,0 +1,13 @@
+{
+  "type": "postgress",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgress",
+  "password": "postgress",
+  "database": "type-graphql-tutorial",
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "/src/entity/*.*"
+  ]
+}
