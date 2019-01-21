@@ -11,12 +11,18 @@ import { redis } from "./redis";
 import { RegisterResolver } from "./module/user/Register";
 import { LoginResolver } from "./module/user/Login";
 import { MeResolver } from "./module/user/Me";
+import { ConfirmUserResolver } from "./module/user/ConfirmUser";
 
 const main = async () => {
   await createConnection();
 
   const schema = await buildSchema({
-    resolvers: [MeResolver, RegisterResolver, LoginResolver],
+    resolvers: [
+      ConfirmUserResolver,
+      MeResolver,
+      RegisterResolver,
+      LoginResolver
+    ],
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId;
     }
@@ -58,9 +64,9 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app });
 
-  app.listen(4000, () =>
-    console.log("server started on http://localhost:4000/graphql")
-  );
+  app.listen(4000, async () => {
+    console.log("server started on http://localhost:4000/graphql");
+  });
 };
 
 main();
